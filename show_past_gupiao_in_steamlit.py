@@ -1,8 +1,9 @@
 import streamlit as st
 import pandas as pd
-
+import pickle as pk
 # 使用 pandas 从 pickle 文件中读取 DataFrame
-df = pd.read_pickle('dataframe_for_streamlit.pk')
+with open('dataframe_for_streamlit.pk','rb') as f:
+    df = pk.load(f)
 
 # 将 'Date' 列转换为日期格式（如果还没有）
 df['Date'] = pd.to_datetime(df['Date'])
