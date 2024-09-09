@@ -25,7 +25,7 @@ def plot_histogram_of_columns(df,column_name):
     # 绘制直方图
     fig = px.histogram(df[column_name], nbins=20)
     # 使用 Streamlit 显示图像
-    st.pyplot(fig)
+    st.plotly_chart(fig)
 
 # 从 .pk 文件中加载 DataFrame
 with open('dataframe_for_steamlit.pk', 'rb') as file:
