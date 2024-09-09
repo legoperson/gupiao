@@ -1,7 +1,8 @@
+import matplotlib.pyplot as plt
 import streamlit as st
 import pandas as pd
 import pickle
-import matplotlib.pyplot as plt
+
 
 def plot_daily_table(df):
     # 获取唯一的日期列表
@@ -39,6 +40,3 @@ with open('dataframe_for_steamlit.pk', 'rb') as file:
 df['Date'] = pd.to_datetime(df['Date'])
 plot_histogram_of_columns(df,'ActualReturn')
 plot_daily_table(df)
-
-
-
