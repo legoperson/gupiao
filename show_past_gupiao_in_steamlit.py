@@ -19,7 +19,7 @@ def plot_daily_table(df):
         with st.expander(f"日期: {date}"):
             # 在展开项中显示该日期的数据
             st.dataframe(filtered_df)
-            
+
 def plot_histogram_of_columns(df,column_name):
     # 绘制直方图
     fig, ax = plt.subplots()
@@ -30,7 +30,7 @@ def plot_histogram_of_columns(df,column_name):
 
     # 使用 Streamlit 显示图像
     st.pyplot(fig)
-            
+
 # 从 .pk 文件中加载 DataFrame
 with open('dataframe_for_steamlit.pk', 'rb') as file:
     df = pickle.load(file)
