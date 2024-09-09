@@ -1,7 +1,8 @@
 os
-pandas
-streamlit
-numpy
 time
 threading
+numpy
+pandas
 matplotlib
+streamlit
+plotly
