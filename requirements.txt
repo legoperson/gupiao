@@ -3,6 +3,5 @@ time
 threading
 numpy
 pandas
-matplotlib
 streamlit
 plotly
