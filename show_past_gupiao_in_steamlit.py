@@ -1,4 +1,4 @@
-import matplotlib.pyplot as plt
+import plotly.express as px
 import streamlit as st
 import pandas as pd
 import pickle
@@ -23,12 +23,7 @@ def plot_daily_table(df):
 
 def plot_histogram_of_columns(df,column_name):
     # 绘制直方图
-    fig, ax = plt.subplots()
-    ax.hist(df[column_name], bins=20, color='skyblue', edgecolor='black')
-    ax.set_title(f'{column_name} Histogram')
-    ax.set_xlabel(f'{column_name}')
-    ax.set_ylabel('Frequency')
-
+    fig = px.histogram(df[column_name], nbins=20)
     # 使用 Streamlit 显示图像
     st.pyplot(fig)
 
