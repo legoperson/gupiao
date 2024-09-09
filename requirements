@@ -4,4 +4,4 @@ streamlit
 numpy
 time
 threading
-matplotlib.pyplot
+matplotlib
