@@ -60,7 +60,7 @@ with open('dataframe_for_steamlit.pk', 'rb') as file:
     DF = pickle.load(file)
 
 # 将 'Date' 列转换为日期格式（如果还没有）
-DF['Date'] = pd.to_datetime(df['Date'])
+DF['Date'] = pd.to_datetime(DF['Date'])
 number = st.number_input('请输入一个数字', min_value=0, max_value=100, value=0)
 
 # 创建一个按钮，当按钮被按下时执行绘图操作
