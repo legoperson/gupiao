@@ -57,12 +57,17 @@ def plot_boxplot(df, column_name):
 
 # 从 .pk 文件中加载 DataFrame
 with open('dataframe_for_steamlit.pk', 'rb') as file:
-    df = pickle.load(file)
+    DF = pickle.load(file)
 
 # 将 'Date' 列转换为日期格式（如果还没有）
-df['Date'] = pd.to_datetime(df['Date'])
-plot_cumsum(df,'ActualReturn')
-plot_boxplot(df, 'ActualReturn')
-plot_histogram_of_columns(df,'ActualReturn')
+DF['Date'] = pd.to_datetime(df['Date'])
+number = st.number_input('请输入一个数字', min_value=0, max_value=100, value=0)
 
-plot_daily_table(df)
+# 创建一个按钮，当按钮被按下时执行绘图操作
+if st.button('绘制图表'):
+    df = DF.copy()
+    df['ActualReturn'] = df.apply(lambda row: number if row['Return_by_10'] > number else row['Return_end_10'], axis=1)
+    plot_cumsum(df,'ActualReturn')
+    plot_boxplot(df, 'ActualReturn')
+    plot_histogram_of_columns(df,'ActualReturn')
+    plot_daily_table(df)
