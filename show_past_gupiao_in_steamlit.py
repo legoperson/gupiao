@@ -23,7 +23,12 @@ def plot_daily_table(df):
 
 def plot_histogram_of_columns(df,column_name):
     # 绘制直方图
-    fig = px.histogram(df[column_name], nbins=40)
+    # fig = px.histogram(df[column_name], nbins=100)
+    fig = px.histogram(df[column_name], x=column_name)
+
+    # 设置 bin 的大小为 0.003
+    fig.update_traces(xbins=dict(size=0.003))
+
     # 使用 Streamlit 显示图像
     st.plotly_chart(fig)
 
