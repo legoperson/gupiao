@@ -32,11 +32,17 @@ def plot_histogram_of_columns(df,column_name):
     # 使用 Streamlit 显示图像
     st.plotly_chart(fig)
 
+def plot_boxplot(df, column_name):
+    fig = px.box(df, x='Date', y=column_name)
+    st.plotly_chart(fig)
+
 # 从 .pk 文件中加载 DataFrame
 with open('dataframe_for_steamlit.pk', 'rb') as file:
     df = pickle.load(file)
 
 # 将 'Date' 列转换为日期格式（如果还没有）
 df['Date'] = pd.to_datetime(df['Date'])
+plot_boxplot(df, 'ActualReturn')
 plot_histogram_of_columns(df,'ActualReturn')
+
 plot_daily_table(df)
