@@ -36,8 +36,8 @@ def plot_boxplot(df, column_name):
     fig = px.box(df, x='Date', y=column_name, points='all')  # 不显示任何数据点为outliers
 
     # 更新中位线的颜色
-    fig.update_traces(marker_color='blue',  # 其他数据点的颜色
-                      line_color='red')     # 中位线的颜色
+    fig.update_traces(marker=dict(color='blue'),  # 其他数据点的颜色保持默认
+                  line=dict(color='red'))    # 中位线的颜色
     fig.update_layout(yaxis=dict(range=[0.5, 1.2]))  # 设置 y 轴范围为 0 到 2
     st.plotly_chart(fig)
 
