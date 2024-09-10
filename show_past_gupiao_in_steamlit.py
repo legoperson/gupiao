@@ -43,7 +43,7 @@ def plot_cumsum(df, column_name):
     # 使用 Plotly 绘制图表
     fig = px.line(df_grouped, x='Date', y='Accumulated_Sum', title='按日期的累积和')
     
-    fig.show()
+    st.plotly_chart(fig)
 
 def plot_boxplot(df, column_name):
     fig = px.box(df, x='Date', y=column_name, points='all')  # 不显示任何数据点为outliers
