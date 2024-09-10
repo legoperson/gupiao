@@ -32,6 +32,19 @@ def plot_histogram_of_columns(df,column_name):
     # 使用 Streamlit 显示图像
     st.plotly_chart(fig)
 
+def plot_cumsum(df, column_name):
+    
+    # 假设 df 是你的数据框，column_name 是你要汇总的列名
+    df_grouped = df.groupby('Date')[column_name].sum().reset_index()
+    
+    # 计算累积和
+    df_grouped['Accumulated_Sum'] = df_grouped[column_name].cumsum()
+    
+    # 使用 Plotly 绘制图表
+    fig = px.line(df_grouped, x='Date', y='Accumulated_Sum', title='按日期的累积和')
+    
+    fig.show()
+
 def plot_boxplot(df, column_name):
     fig = px.box(df, x='Date', y=column_name, points='all')  # 不显示任何数据点为outliers
 
@@ -47,6 +60,7 @@ with open('dataframe_for_steamlit.pk', 'rb') as file:
 
 # 将 'Date' 列转换为日期格式（如果还没有）
 df['Date'] = pd.to_datetime(df['Date'])
+plot_cumsum(df,'ActualReturn')
 plot_boxplot(df, 'ActualReturn')
 plot_histogram_of_columns(df,'ActualReturn')
 
