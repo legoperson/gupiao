@@ -34,6 +34,7 @@ def plot_histogram_of_columns(df,column_name):
 
 def plot_boxplot(df, column_name):
     fig = px.box(df, x='Date', y=column_name)
+    fig.update_layout(yaxis=dict(range=[0, 2]))  # 设置 y 轴范围为 0 到 2
     st.plotly_chart(fig)
 
 # 从 .pk 文件中加载 DataFrame
