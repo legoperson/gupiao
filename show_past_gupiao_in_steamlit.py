@@ -35,6 +35,7 @@ def plot_histogram_of_columns(df,column_name):
 def plot_cumsum(df, column_name):
     
     # 假设 df 是你的数据框，column_name 是你要汇总的列名
+    df[column_name] -= 1
     df_grouped = df.groupby('Date')[column_name].sum().reset_index()
     
     # 计算累积和
