@@ -33,7 +33,11 @@ def plot_histogram_of_columns(df,column_name):
     st.plotly_chart(fig)
 
 def plot_boxplot(df, column_name):
-    fig = px.box(df, x='Date', y=column_name, points='suspectedoutliers')
+    fig = px.box(df, x='Date', y=column_name, points='all')  # 不显示任何数据点为outliers
+
+    # 更新中位线的颜色
+    fig.update_traces(marker_color='blue',  # 其他数据点的颜色
+                      line_color='red')     # 中位线的颜色
     fig.update_layout(yaxis=dict(range=[0.5, 1.2]))  # 设置 y 轴范围为 0 到 2
     st.plotly_chart(fig)
 
