@@ -2,6 +2,7 @@ import plotly.express as px
 import streamlit as st
 import pandas as pd
 import pickle
+import plotly.graph_objects as go
 
 
 def plot_daily_table(df):
@@ -36,21 +37,37 @@ def plot_histogram_of_columns(df, column_name):
 
 def plot_cumsum(df_in, randf_in, column_name):
     # 假设 df 是你的数据框，column_name 是你要汇总的列名
+    # Assume df_in and randf_in are provided DataFrames
     df = df_in.copy()
     ran_df = randf_in.copy()
-
+    
+    # Process the first DataFrame
     df[column_name] -= 1
     df_grouped = df.groupby('Date')[column_name].sum().reset_index()
     df_grouped['Accumulated_Sum'] = df_grouped[column_name].cumsum()
-    # 使用 Plotly 绘制图表
-    fig = px.line(df_grouped, x='Date', y='Accumulated_Sum', title='按日期的累积和')
-
+    
+    # Process the second DataFrame
     ran_df[column_name] -= 1
-    df_grouped = ran_df.groupby('Date')[column_name].sum().reset_index()
-    df_grouped['Accumulated_Sum'] = df_grouped[column_name].cumsum()/10
-    # 使用 Plotly 绘制图表
-    fig = px.line(df_grouped, x='Date', y='Accumulated_Sum', title='按日期的累积和_random')
-
+    ran_df_grouped = ran_df.groupby('Date')[column_name].sum().reset_index()
+    ran_df_grouped['Accumulated_Sum'] = ran_df_grouped[column_name].cumsum() / 10
+    
+    # Create a figure
+    fig = go.Figure()
+    
+    # Add the first line for the original DataFrame
+    fig.add_trace(go.Scatter(x=df_grouped['Date'], y=df_grouped['Accumulated_Sum'],
+                             mode='lines', name='Original Data'))
+    
+    # Add the second line for the random DataFrame
+    fig.add_trace(go.Scatter(x=ran_df_grouped['Date'], y=ran_df_grouped['Accumulated_Sum'],
+                             mode='lines', name='Random Data (Scaled)'))
+    
+    # Update layout for the figure
+    fig.update_layout(title='按日期的累积和对比',
+                      xaxis_title='Date',
+                      yaxis_title='Accumulated Sum')
+    
+    # Display the plot using Streamlit
     st.plotly_chart(fig)
 
 
