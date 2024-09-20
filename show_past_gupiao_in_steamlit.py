@@ -43,13 +43,13 @@ def plot_cumsum(df_in, randf_in, column_name):
     
     # Process the first DataFrame
     df[column_name] -= 1
-    df_grouped = df.groupby('Date')[column_name].sum().reset_index()
+    df_grouped = df.groupby('Date')[column_name].mean().reset_index()
     df_grouped['Accumulated_Sum'] = df_grouped[column_name].cumsum()
     
     # Process the second DataFrame
     ran_df[column_name] -= 1
-    ran_df_grouped = ran_df.groupby('Date')[column_name].sum().reset_index()
-    ran_df_grouped['Accumulated_Sum'] = ran_df_grouped[column_name].cumsum() / 10
+    ran_df_grouped = ran_df.groupby('Date')[column_name].mean().reset_index()
+    ran_df_grouped['Accumulated_Sum'] = ran_df_grouped[column_name].cumsum()  
     
     # Create a figure
     fig = go.Figure()
